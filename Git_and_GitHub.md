@@ -437,6 +437,132 @@ git push                              # 6. upload to GitHub
 
 ---
 
+## Scenario F — Pull Requests (PR)
+
+**When to use:** When you want to merge a branch into `main` but with a review step in between — standard practice in teams, and a good habit even when working solo.
+
+---
+
+### What is a Pull Request?
+
+A pull request is a way to **ask for your branch to be merged into another branch** on GitHub. Instead of merging directly in Terminal, you open a PR on GitHub so the changes can be reviewed, discussed, and approved before they touch `main`.
+
+```
+my-feature:   A --- B --- C   ← your changes
+                            \
+                             PR → review → merge
+                            /
+main:         A --- B --- C --- D   ← main gets updated
+```
+
+---
+
+### Why use a PR instead of just merging?
+
+| Direct merge | Pull Request |
+|---|---|
+| Instant, no review | Someone reviews before merging |
+| Good for quick solo work | Standard in all teams |
+| No record of discussion | Comments, feedback, history all saved on GitHub |
+
+---
+
+### Step 1 — Push your branch to GitHub (in Terminal)
+
+```bash
+git checkout -b my-feature      # create and switch to branch
+# ... do your work ...
+git add .
+git commit -m "what you did"
+git push -u origin my-feature   # push the branch to GitHub
+```
+
+---
+
+### Step 2 — Open a Pull Request (on GitHub)
+
+1. Go to your repo on **github.com**
+2. GitHub shows a yellow banner: *"my-feature had recent pushes — Compare & pull request"*
+3. Click **Compare & pull request**
+4. Fill in:
+   - **Title** — short description of what you did
+   - **Description** — more detail if needed
+5. Check the **base branch** (where you're merging INTO — usually `main`) and **compare branch** (your branch)
+6. Click **Create pull request**
+
+---
+
+### Step 3 — Review the changes
+
+On the **Files changed** tab you'll see:
+- **Green lines (+)** = lines you added
+- **Red lines (−)** = lines you removed
+
+Review to make sure everything looks right before merging.
+
+---
+
+### Step 4 — Merge the Pull Request
+
+1. Click **Merge pull request**
+2. Click **Confirm merge**
+3. Optionally click **Delete branch** to clean up the branch on GitHub
+
+Your changes are now in `main` on GitHub.
+
+---
+
+### Step 5 — Update your local main (in Terminal)
+
+After merging on GitHub, bring the update down to your Mac:
+
+```bash
+git checkout main
+git pull
+```
+
+---
+
+### Full PR workflow at a glance
+
+```bash
+# --- Terminal ---
+git checkout -b my-feature          # 1. create branch
+# ... do your work ...
+git add .
+git commit -m "what you did"        # 2. commit
+git push -u origin my-feature       # 3. push branch to GitHub
+
+# --- GitHub (website) ---
+# 4. Click "Compare & pull request"
+# 5. Write title and description
+# 6. Click "Create pull request"
+# 7. Review changes on "Files changed" tab
+# 8. Click "Merge pull request" → "Confirm merge"
+# 9. Click "Delete branch" (optional)
+
+# --- Terminal ---
+git checkout main                   # 10. switch back to main
+git pull                            # 11. get the merged changes
+git branch -d my-feature            # 12. delete branch locally (optional)
+```
+
+---
+
+### Key PR terms
+
+| Term | Meaning |
+|---|---|
+| **Pull Request (PR)** | A request to merge your branch into another branch |
+| **Base branch** | The branch you want to merge INTO (usually `main`) |
+| **Compare branch** | Your branch with the new changes |
+| **Reviewer** | Someone who reads and approves your code before merging |
+| **Merge** | When the PR is approved and changes are added to `main` |
+| **Files changed** | The tab on GitHub showing exactly what lines you added/removed |
+| **Conversation** | The comments and discussion thread on the PR |
+
+---
+
 ## Tips
 
 - Always write a clear commit message — future you will thank you
