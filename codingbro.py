@@ -1,66 +1,87 @@
 # ============================================================
-# 1.2  Variables and Data Types
+# 1.2  Variables and Data Types — DONE
 # ============================================================
 
-# --- PART 1: Basic variables ---
-name = "Reza"
-age = 28
-height = 1.82
-is_employed = True
-result = None
-
-print(name)
-print(age)
-print(height)
-print(is_employed)
-print(result)
-
-
-# --- PART 2: type() ---
-print(type(name))        # <class 'str'>
-print(type(age))         # <class 'int'>
-print(type(height))      # <class 'float'>
-print(type(is_employed)) # <class 'bool'>
-print(type(result))      # <class 'NoneType'>
-
-
-# --- PART 3: f-strings ---
-greeting = f"Hello, {name}! You are {age} years old."
-print(greeting)
-
-
-# --- PART 4: Type conversion ---
-num_as_string = "42"
-print(int(num_as_string) + 8)   # 50
-print(float("3.14") * 2)        # 6.28
-print(str(100) + " points")     # 100 points
-
-
-# --- PART 5: String methods ---
-raw = "  Hello, World!  "
-print(raw.strip())              # removes leading/trailing spaces
-print(raw.strip().lower())      # hello, world!
-print(raw.strip().upper())      # HELLO, WORLD!
-print(raw.strip().replace("World", "Reza"))  # Hello, Reza!
-print(raw.strip().split(", "))  # ['Hello', 'World!']
+# if False:
+#     name = "Reza"
+#     age = 28
+#     height = 1.82
+#     is_employed = True
+#     result = None
+#     print(name, age, height, is_employed, result)
+#     print(type(name), type(age), type(height), type(is_employed), type(result))
+#     greeting = f"Hello, {name}! You are {age} years old."
+#     print(greeting)
+#     num_as_string = "42"
+#     print(int(num_as_string) + 8)
+#     print(float("3.14") * 2)
+#     print(str(100) + " points")
+#     raw = "  Hello, World!  "
+#     print(raw.strip())
+#     print(raw.strip().lower())
+#     print(raw.strip().upper())
+#     print(raw.strip().replace("World", "Reza"))
+#     print(raw.strip().split(", "))
+#     city = "Hamburg"
+#     print(f"{city.lower()}")
+#     temperature = float("22")
+#     print(f"The temperature is {temperature} degrees.")
+#     sentence = " Python is awesome "
+#     print(sentence.strip().upper().replace("AWESOME", "POWERFUL"))
+#     print(type(True * 5))
 
 
 # ============================================================
-# EXERCISES — try these yourself, then run the file
+# 1.3  Data Structures
 # ============================================================
 
-# 1. Create a variable `city` set to "Hamburg" and print it in lowercase.
-city = "Hamburg"
-print(F"{city.lower()}")
-# 2. Create a variable `temperature` set to the string "22" and convert it
-#    to a float. Then print: "The temperature is 22.0 degrees."
-#    Use an f-string.
-temperature = float("22")
-print(f"the temperature is {temperature}")
-# 3. Create a variable `sentence = "  Python is awesome  "` and print it
-#    with whitespace stripped, all caps, and with "awesome" replaced by "powerful".
-sentence = " Python is awesome "
-print(sentence.strip().upper().replace("AWESOME","powerful"))
-# 4. What is the type of True * 5?  Use type() to check, then print the result.
-#    (Hint: booleans are a subclass of int in Python)
-print(type(True * 5))
+# --- PART 1: List ---
+cities = ["Hamburg", "Berlin", "Munich"]
+print(cities[0])       # first item
+print(cities[-1])      # last item
+cities.append("Frankfurt")
+print(cities)
+
+# --- PART 2: Dictionary ---
+person = {"name": "Reza", "age": 28, "city": "Hamburg"}
+print(person["name"])
+person["job"] = "Developer"
+print(person)
+
+# --- PART 3: Tuple ---
+coordinates = (53.55, 10.00)
+print(coordinates[0])
+print(type(coordinates))
+
+# --- PART 4: Set ---
+tags = {"python", "data", "python", "azure"}
+print(tags)             # "python" appears once only
+tags.add("sql")
+print("python" in tags) # True 
+
+
+# ============================================================
+# EXERCISES
+# ============================================================
+
+# 1. Create a list of 3 programming languages. Print the second one.
+#    Then add a 4th language and print the full list.
+prlan = ["python", "Java", "C++"]
+prlan.append("Terraform")
+print(prlan)
+
+# 2. Create a dictionary for a job posting with keys:
+#    title, company, location, and skills (skills should be a list).
+#    Print the company and the first skill.
+jobtitle = {"title": "Developer", "Company": "Bosch", "skills":["Azure", "Data science", "Data Engineering"]}
+print (jobtitle["Company"], "and" ,jobtitle["skills"][0])
+
+# 3. Create a set with these values: "excel", "python", "sql", "python", "excel"
+#    Print the set — how many items does it have?
+skills = {"excel", "python", "sql", "python", "excel"}
+print(skills)
+# 4. Create a tuple with your name and age. Try to change the age value.
+#    What error do you get?
+myinfo = ("Reza", 34)
+fact = "Reza" in myinfo
+print (fact)
