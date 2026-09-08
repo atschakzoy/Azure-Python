@@ -443,3 +443,168 @@ git push                              # 6. upload to GitHub
 - Run `git status` often to see what's going on
 - Commit small and often, not one big chunk at the end
 - Never upload your `venv` folder — always add it to `.gitignore`
+
+---
+
+## Scenario E — Working with Branches
+
+**When to use:** When you want to try something new, fix a bug, or add a feature without touching your working `main` branch. This is the standard way real developers work.
+
+---
+
+### What is a branch?
+
+A branch is a separate, isolated copy of your project that lives alongside `main`. Changes you make on a branch do not affect `main` until you deliberately merge them.
+
+```
+main:     A --- B --- C                   ← stable, untouched
+                       \
+my-feature:             D --- E --- F     ← your new work, isolated
+```
+
+---
+
+### Step 1 — Make sure you're on main and up to date
+
+Always start a new branch from the latest version of `main`:
+
+```bash
+git checkout main
+git pull
+```
+
+---
+
+### Step 2 — Create a new branch and switch to it
+
+```bash
+git checkout -b my-feature-branch
+```
+
+- `-b` = create the branch (only needed the first time)
+- `my-feature-branch` = the name you choose — use lowercase with hyphens, no spaces
+
+After running this you should see:
+```
+Switched to a new branch 'my-feature-branch'
+```
+
+---
+
+### Step 3 — Confirm which branch you're on
+
+```bash
+git branch
+```
+
+Output:
+```
+  main
+* my-feature-branch
+```
+
+The `*` shows your current branch.
+
+---
+
+### Step 4 — Do your work and commit as normal
+
+Make changes to your files, then:
+
+```bash
+git add .
+git commit -m "describe what you did"
+```
+
+These commits only exist on `my-feature-branch` — `main` is completely untouched.
+
+---
+
+### Step 5 — Push your branch to GitHub
+
+```bash
+git push -u origin my-feature-branch
+```
+
+- `-u origin my-feature-branch` — links your local branch to GitHub (only needed the first time)
+- After this, just use `git push` as usual
+
+On GitHub you will now see a new branch appear alongside `main`.
+
+---
+
+### Step 6 — Merge your branch back into main
+
+When your work is ready and you want to bring it into `main`:
+
+```bash
+git checkout main          # switch back to main
+git merge my-feature-branch  # bring the branch work into main
+git push                   # upload the updated main to GitHub
+```
+
+---
+
+### Step 7 — Delete the branch (optional, clean up)
+
+Once merged, the branch is no longer needed:
+
+```bash
+git branch -d my-feature-branch          # delete locally
+git push origin --delete my-feature-branch  # delete on GitHub
+```
+
+---
+
+### Full branch workflow at a glance
+
+```bash
+git checkout main                        # 1. start from main
+git pull                                 # 2. get latest
+git checkout -b my-feature-branch        # 3. create + switch to new branch
+# ... do your work ...
+git add .                                # 4. stage changes
+git commit -m "what you did"             # 5. commit on the branch
+git push -u origin my-feature-branch     # 6. push branch to GitHub
+git checkout main                        # 7. switch back to main
+git merge my-feature-branch              # 8. merge work into main
+git push                                 # 9. push updated main to GitHub
+git branch -d my-feature-branch          # 10. clean up (optional)
+```
+
+---
+
+### Switching between branches
+
+```bash
+git checkout main                  # go to main
+git checkout my-feature-branch     # go back to your branch
+```
+
+When you switch, your files in the folder actually change — files that only exist on one branch will appear and disappear. This is normal.
+
+---
+
+### Branch commands reference
+
+| Command | What it does |
+|---|---|
+| `git branch` | List all local branches (`*` = current one) |
+| `git branch -a` | List local AND remote branches |
+| `git checkout -b branch-name` | Create a new branch and switch to it |
+| `git checkout branch-name` | Switch to an existing branch |
+| `git merge branch-name` | Merge a branch into the current branch |
+| `git branch -d branch-name` | Delete a branch locally (safe — only works if merged) |
+| `git push -u origin branch-name` | Push a new branch to GitHub for the first time |
+| `git push origin --delete branch-name` | Delete a branch on GitHub |
+
+---
+
+### Key terms added
+
+| Term | Meaning |
+|---|---|
+| **Branch** | An isolated copy of the project to work on without affecting `main` |
+| **Merge** | Combining the changes from one branch into another |
+| **Checkout** | Switching to a different branch |
+| **HEAD** | A pointer that shows which branch/commit you are currently on |
