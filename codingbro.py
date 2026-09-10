@@ -181,43 +181,155 @@
 
 
 # ============================================================
-# COMBINED EXERCISES — Control Flow + Data Structures
+# COMBINED EXERCISES — Control Flow + Data Structures — DONE
 # ============================================================
 
-# 1. Loop through a dictionary
-#    You have this dict:
-#    person = {"name": "Reza", "city": "Hamburg", "job": "Developer", "age": 34}
-#    Use a for loop to print every key and value like this:
-#    name → Reza
-#    city → Hamburg
-#    (Hint: use .items())
+# # 1. Loop through a dictionary
+# person = {"name": "Reza", "city": "Hamburg", "job": "Developer", "age": 34}
+# for a, b in person.items():
+#     print(f"{a} -> {b}")
+
+# # 2. Filter a list
+# scores = [45, 88, 62, 91, 37, 74, 55, 83]
+# high_scores = []
+# for num in scores:
+#     if num > 70:
+#         high_scores.append(num)
+# print(high_scores)
+
+# # 3. Find an item with enumerate
+# tools = ["excel", "sql", "python", "power bi", "azure"]
+# for i, item in enumerate(tools):
+#     if item == "python":
+#         print(f"Found {item} at position {i}")
+#         break
+
+# # 4. Count occurrences
+# responses = ["yes", "no", "yes", "yes", "no", "yes", "no"]
+# answer = responses.count("yes")
+# print(f"yes count: {answer}")
+
+# # 5. Nested if inside a loop
+# people = [
+#     {"name": "Reza", "city": "Hamburg"},
+#     {"name": "Ali", "city": "Berlin"},
+#     {"name": "Sara", "city": "Hamburg"},
+#     {"name": "Max", "city": "Munich"},
+# ]
+# for person in people:
+#     if person["city"] == "Hamburg":
+#         print(person["name"])
 
 
-# 2. Filter a list
-#    You have this list: scores = [45, 88, 62, 91, 37, 74, 55, 83]
-#    Loop through it and collect only scores above 70 into a new list called `high_scores`.
-#    Print high_scores at the end.
-#    (Hint: start with high_scores = [] and use .append() inside the loop)
+# ============================================================
+# EXERCISES — Dict in List / List in Dict — DONE
+# ============================================================
+
+# # 1. Print only names of employees in the "Data" department
+# employees = [
+#     {"name": "Reza",  "department": "Data",    "salary": 4500},
+#     {"name": "Ali",   "department": "DevOps",  "salary": 3800},
+#     {"name": "Sara",  "department": "Data",    "salary": 4200},
+#     {"name": "Max",   "department": "Finance", "salary": 3500},
+# ]
+# for persons in employees:
+#     if persons["department"] == "Data":
+#         print(persons["name"])
+
+# # 2. Same list — print each employee like: Reza works in Data and earns 4500
+# for persons in employees:
+#     print(f"{persons['name']} works in {persons['department']} and earns {persons['salary']}")
+
+# # 3. Dict with a list inside
+# company = {
+#     "name": "Bosch",
+#     "locations": ["Hamburg", "Berlin", "Munich"],
+#     "headcount": 5000
+# }
+# print(company["locations"][1])
+# for location in company["locations"]:
+#     print(location)
 
 
-# 3. Find an item with enumerate
-#    You have this list: tools = ["excel", "sql", "python", "power bi", "azure"]
-#    Loop through it using enumerate. When you find "python", print its position and break.
-#    Expected output: Found python at position 2
+# ============================================================
+# 1.5  Functions
+# ============================================================
+
+# --- EXAMPLES ---
+
+# Basic function — def, parameters, return
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Reza"))
 
 
-# 4. Count occurrences
-#    You have this list: responses = ["yes", "no", "yes", "yes", "no", "yes", "no"]
-#    Loop through it and count how many times "yes" appears.
-#    Print: "yes count: 4"
+# Default parameter — used when caller doesn't pass a value
+def connect(host, port=5432):
+    return f"Connecting to {host}:{port}"
+
+print(connect("localhost"))          # uses default port
+print(connect("localhost", 3306))    # overrides default
 
 
-# 5. Nested if inside a loop
-#    You have this list of dicts:
-#    people = [
-#        {"name": "Reza", "city": "Hamburg"},
-#        {"name": "Ali", "city": "Berlin"},
-#        {"name": "Sara", "city": "Hamburg"},
-#        {"name": "Max", "city": "Munich"},
-#    ]
-#    Loop through it and print only the names of people from "Hamburg".
+# Multiple return values
+def min_max(numbers):
+    return min(numbers), max(numbers)
+
+high, low = min_max([4, 1, 9, 2, 7])
+print(low, high)
+
+
+# *args — accept any number of positional arguments
+def total(*numbers):
+    return sum(numbers)
+
+print(total(10, 20, 30))
+
+
+# **kwargs — accept any number of keyword arguments
+def create_profile(**fields):
+    return fields
+
+print(create_profile(name="Reza", city="Hamburg", role="Data Engineer"))
+
+
+# Lambda — short anonymous function, one expression only
+double = lambda x: x * 2
+print(double(5))
+
+
+# --- EXERCISES ---
+
+# 1. Write a function called `describe_person`
+#    It takes name, age, city as parameters
+#    It returns: "Reza is 34 years old and lives in Hamburg"
+def describe_person(name,age,city):
+    return f"{name} is {age} years old and lives in {city}"
+print(describe_person(name="Reza", age=34, city="Hamburg"))
+
+# 2. Write a function called `is_adult`
+#    It takes age as a parameter
+#    It returns True if age >= 18, False otherwise
+#    Test it: print(is_adult(20)) → True, print(is_adult(15)) → False
+
+# 3. Write a function called `summarize`
+#    It takes a list of numbers
+#    It returns three values: total (sum), average, and count
+#    Print all three on one line: Total: 30 | Avg: 10.0 | Count: 3
+
+# 4. Write a function called `filter_by_city`
+#    It takes a list of employee dicts and a city name
+#    It returns a new list with only employees from that city
+#    Use this data:
+employees = [
+    {"name": "Reza",  "city": "Hamburg"},
+    {"name": "Ali",   "city": "Berlin"},
+    {"name": "Sara",  "city": "Hamburg"},
+    {"name": "Max",   "city": "Munich"},
+]
+#    Expected: filter_by_city(employees, "Hamburg") → Reza and Sara dicts
+
+# 5. Write a lambda that takes a number and returns True if it's even
+#    Hint: use % — even means remainder of dividing by 2 is 0
+#    Test: print(is_even(4)) → True, print(is_even(7)) → False

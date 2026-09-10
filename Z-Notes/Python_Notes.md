@@ -131,6 +131,14 @@ del person["age"]           # delete a key and its value completely
 person.keys()               # returns all keys
 person.values()             # returns all values
 person.items()              # returns all key-value pairs as tuples — [("name","Reza"), ...]
+
+for key, value in person.items():   # loop through every key and value
+    print(f"{key} → {value}")
+
+# access a list inside a dict — get the key first, then loop the list
+company = {"name": "Bosch", "locations": ["Hamburg", "Berlin", "Munich"]}
+for location in company["locations"]:
+    print(location)
 person.get("name")          # safe get — returns None instead of error if key doesn't exist
 person.get("age", 0)        # safe get with default — returns 0 if "age" missing
 person.update({"city": "Berlin"})  # merge another dict into this one — adds or updates keys
@@ -188,6 +196,20 @@ else:
 ```python
 for fruit in ["apple", "banana", "cherry"]:
     print(fruit.upper())
+
+# filter a list into a new list
+scores = [45, 88, 62, 91, 37, 74]
+high_scores = []
+for num in scores:
+    if num > 70:
+        high_scores.append(num)
+print(high_scores)   # [88, 91, 74]
+
+# loop through a list of dicts — nested if
+people = [{"name": "Reza", "city": "Hamburg"}, {"name": "Ali", "city": "Berlin"}]
+for person in people:
+    if person["city"] == "Hamburg":
+        print(person["name"])   # only prints Reza
 ```
 > Use `for` when you know the items — works on any collection: list, tuple, set, dict, string, range.
 
@@ -224,5 +246,137 @@ for i in range(10):
 ```python
 for i, skill in enumerate(["Python", "SQL", "Azure"]):
     print(f"{i}: {skill}")   # 0: Python / 1: SQL / 2: Azure
+
+# find an item and print its position
+tools = ["excel", "sql", "python", "azure"]
+for i, item in enumerate(tools):
+    if item == "python":
+        print(f"Found {item} at position {i}")
+        break
 ```
 > Use when you need both the position and the value while looping.
+
+---
+
+## 1.5 — Functions
+
+### Anatomy of a function
+```
+def greet(name):
+─┬─ ──┬── ──┬──
+ │    │     └── parameter — placeholder variable, gets value when called
+ │    └──────── function name — what you call to run it
+ └────────────── def keyword — tells Python a function is being defined
+
+    return f"Hello, {name}!"
+    ──┬──  ─────────────────
+      │    └── return value — what gets sent back to the caller
+      └──────── return keyword — sends the value out of the function
+
+print(greet("Reza"))
+      ──┬──  ──┬──
+        │      └── argument — the actual value passed in ("Reza" → name)
+        └────────── function call — runs the function
+```
+
+| Part | Name | Example |
+|---|---|---|
+| `def` | keyword | signals a function definition |
+| `greet` | function name | what you type to call it |
+| `(name)` | parameter | placeholder inside the function |
+| `:` | block start | marks start of function body |
+| indented lines | function body | the code that runs |
+| `return` | keyword | sends a value back out |
+| `f"Hello, {name}!"` | return value | what the function gives back |
+| `greet("Reza")` | function call | runs the function |
+| `"Reza"` | argument | the actual value passed to the parameter |
+
+### def — define a function
+```python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Reza"))   # Hello, Reza!
+```
+> `def` tells Python you're defining a function. `return` sends a value back to whoever called it. Without `return`, the function returns `None`.
+
+### Parameters
+```python
+def greet(name):       # name is the parameter — a placeholder variable
+    return f"Hello, {name}!"
+
+greet("Reza")          # "Reza" is the argument — the actual value passed in
+```
+> Parameters are empty boxes with labels. When you call the function, you drop a value into each box.
+
+### Default parameters
+```python
+def connect(host, port=5432):
+    return f"Connecting to {host}:{port}"
+
+connect("localhost")          # uses default: Connecting to localhost:5432
+connect("localhost", 3306)    # overrides default: Connecting to localhost:3306
+```
+> Required parameters come first, default parameters come after — always.
+
+### Multiple return values + unpacking
+```python
+def min_max(numbers):
+    return min(numbers), max(numbers)
+
+low, high = min_max([4, 1, 9, 2, 7])   # unpacking — left to right
+print(low, high)   # 1 9
+```
+> A function can return more than one value separated by a comma. Unpack them into separate variables on the left — order matters.
+
+### *args — any number of positional arguments
+```python
+def total(*numbers):      # * collects all values into a tuple
+    return sum(numbers)
+
+total(10, 20, 30)         # numbers = (10, 20, 30) → returns 60
+total(5)                  # numbers = (5,)          → returns 5
+```
+> Use `*args` when you don't know how many values the caller will pass.
+
+### **kwargs — any number of keyword arguments
+```python
+def create_profile(**fields):   # ** collects all key=value pairs into a dict
+    return fields
+
+create_profile(name="Reza", city="Hamburg", role="Data Engineer")
+# fields = {"name": "Reza", "city": "Hamburg", "role": "Data Engineer"}
+```
+
+| | Syntax | Collects into | How you pass values |
+|---|---|---|---|
+| `*args` | one star | tuple | `total(10, 20, 30)` |
+| `**kwargs` | two stars | dict | `create_profile(name="Reza")` |
+
+### Lambda — short anonymous function
+```python
+double = lambda x: x * 2
+double(5)   # 10
+
+# same as:
+def double(x):
+    return x * 2
+```
+> Lambda is one line only — no loops, no multiple conditions. Use `def` the moment you need more than one expression.
+
+### When to use a function
+```python
+# without function — logic repeated 3 times
+print(f"Hello, Reza!")
+print(f"Hello, Ali!")
+print(f"Hello, Sara!")
+
+# with function — logic lives in one place
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Reza"))
+print(greet("Ali"))
+print(greet("Sara"))
+```
+> Write once, call anywhere. If the logic needs to change, change it in one place and everything updates.

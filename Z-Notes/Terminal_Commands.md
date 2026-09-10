@@ -144,6 +144,63 @@ git branch -d my-feature                 # clean up (optional)
 
 ---
 
+### Team workflow (5-person project)
+
+**Step 1 — First day (once only)**
+```bash
+git clone https://github.com/your-org/your-repo.git
+cd your-repo
+git checkout -b feature/reza-azure-pipeline   # your own branch, never work on main
+```
+
+**Step 2 — Every morning**
+```bash
+git checkout main
+git pull origin main                           # get teammates' latest changes
+git checkout feature/reza-azure-pipeline
+git merge main                                 # bring those changes into your branch
+```
+
+**Step 3 — While working**
+```bash
+git status
+git add .
+git commit -m "add: azure storage pipeline configuration"
+git push origin feature/reza-azure-pipeline
+```
+
+**Step 4 — When your feature is done**
+```
+Push your branch → GitHub → "Compare & Pull Request"
+→ describe what you did → assign a teammate to review → wait for approval → merge
+```
+
+**Step 5 — After PR is merged**
+```bash
+git checkout main
+git pull origin main
+git branch -d feature/reza-azure-pipeline     # delete old branch
+git checkout -b feature/reza-next-task        # start fresh for next task
+```
+
+**Step 6 — End of project**
+```bash
+git checkout main
+git pull origin main
+git log --oneline --graph --all               # see full history
+git tag -a v1.0.0 -m "Project final release"
+git push origin v1.0.0
+```
+
+**Golden rules**
+- Never push directly to `main`
+- Never start working without pulling first in the morning
+- Always work on your own branch
+- Always write clear commit messages
+- Always open a Pull Request — let a teammate review before merging
+
+---
+
 ### Key Git terms
 
 | Term | Meaning |
