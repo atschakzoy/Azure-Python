@@ -312,11 +312,20 @@ print(describe_person(name="Reza", age=34, city="Hamburg"))
 #    It takes age as a parameter
 #    It returns True if age >= 18, False otherwise
 #    Test it: print(is_adult(20)) → True, print(is_adult(15)) → False
-
+def is_adult(age):
+    if age > 18:
+        return "True"
+    else:
+        return "False"
+print(is_adult(13))
 # 3. Write a function called `summarize`
 #    It takes a list of numbers
 #    It returns three values: total (sum), average, and count
 #    Print all three on one line: Total: 30 | Avg: 10.0 | Count: 3
+def summarize(numbers):
+    return sum(numbers), sum(numbers)/len(numbers), numbers.count(12)
+totla, average, count = summarize([3,5,7,3,1,4])
+print(f"total: {totla}, average: {average} count: {count}")
 
 # 4. Write a function called `filter_by_city`
 #    It takes a list of employee dicts and a city name
@@ -328,6 +337,13 @@ employees = [
     {"name": "Sara",  "city": "Hamburg"},
     {"name": "Max",   "city": "Munich"},
 ]
+def filter_by_city(employees, city):
+    result = []
+    for person in employees:
+        if person["city"] == city:
+            result.append(person["name"])
+    return result
+print(filter_by_city(employees, "Hamburg"))
 #    Expected: filter_by_city(employees, "Hamburg") → Reza and Sara dicts
 
 # 5. Write a lambda that takes a number and returns True if it's even

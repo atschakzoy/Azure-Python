@@ -309,6 +309,25 @@ greet("Reza")          # "Reza" is the argument — the actual value passed in
 ```
 > Parameters are empty boxes with labels. When you call the function, you drop a value into each box.
 
+### Multiple parameters — what each one receives
+```python
+def filter_by_city(employees, city):
+    ...
+
+filter_by_city(employees, "Hamburg")
+#              ↑            ↑
+#    argument 1        argument 2
+```
+
+| Parameter | Receives | What it is |
+|-----------|----------|------------|
+| `employees` | the list of dicts | your data |
+| `city` | `"Hamburg"` | the filter value |
+
+Arguments are matched to parameters **left to right by position** — first argument goes to first parameter, second to second.
+
+> Parameters are just placeholders. It doesn't matter that the global variable and the parameter are both called `employees` — they are separate things. The parameter only gets a value when the function is called.
+
 ### Default parameters
 ```python
 def connect(host, port=5432):
