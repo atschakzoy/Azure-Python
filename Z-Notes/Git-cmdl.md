@@ -1,56 +1,6 @@
-# Terminal Commands Reference
+# Git Commands Reference
 
-## Navigation
-
-| Command | What it does |
-|---|---|
-| `cd path` | Move into a folder |
-| `cd ..` | Go up one folder level |
-| `ls` | List files in current folder |
-| `pwd` | Show your current location |
-| `cat filename` | Print file contents in the terminal |
-
-**Example:**
-```bash
-cd "/Users/rezanazari/Desktop/Learning Materials/Python exercise"
-ls
-```
-
----
-
-## Python
-
-| Command | What it does |
-|---|---|
-| `python3 --version` | Check Python version |
-| `python3 exercise.py` | Run your Python file |
-
----
-
-## Virtual Environment
-
-| Command | What it does |
-|---|---|
-| `python3 -m venv venv` | Create a virtual environment |
-| `source venv/bin/activate` | Activate it (Mac/Linux) |
-| `deactivate` | Turn it off |
-
-**When active:** your prompt starts with `(venv)`  
-**Rule:** Always activate before running your Python files.
-
-**Every session:**
-```bash
-cd "/Users/rezanazari/Desktop/Learning Materials/Python exercise"
-source venv/bin/activate
-# ... do your work ...
-deactivate
-```
-
----
-
-## Git
-
-### Setup (do once ever)
+## Setup (do once ever)
 
 | Command | What it does |
 |---|---|
@@ -59,7 +9,7 @@ deactivate
 
 ---
 
-### Starting a project
+## Starting a project
 
 | Command | What it does |
 |---|---|
@@ -70,7 +20,7 @@ deactivate
 
 ---
 
-### Daily workflow
+## Daily workflow
 
 ```bash
 git pull                          # 1. get latest from GitHub
@@ -83,7 +33,7 @@ git push                          # 5. upload to GitHub
 
 ---
 
-### Checking what's going on
+## Checking what's going on
 
 | Command | What it does |
 |---|---|
@@ -96,7 +46,7 @@ git push                          # 5. upload to GitHub
 
 ---
 
-### Staging and committing
+## Staging and committing
 
 | Command | What it does |
 |---|---|
@@ -106,17 +56,18 @@ git push                          # 5. upload to GitHub
 
 ---
 
-### Pushing and pulling
+## Pushing and pulling
 
 | Command | What it does |
 |---|---|
 | `git push -u origin main` | Push to GitHub for the first time (saves the destination) |
 | `git push` | Push after the first time |
-| `git pull` | Download latest commits from GitHub to your Mac |
+| `git pull` | Pull from wherever current branch is tracking |
+| `git pull origin main` | Pull main from GitHub — use on feature branch for morning sync |
 
 ---
 
-### Branches
+## Branches
 
 | Command | What it does |
 |---|---|
@@ -144,7 +95,7 @@ git branch -d my-feature                 # clean up (optional)
 
 ---
 
-### Team workflow (5-person project)
+## Team workflow (5-person project)
 
 **Step 1 — First day (once only)**
 ```bash
@@ -201,7 +152,7 @@ git push origin v1.0.0
 
 ---
 
-### Key Git terms
+## Key Git terms
 
 | Term | Meaning |
 |---|---|
@@ -218,19 +169,10 @@ git push origin v1.0.0
 
 ---
 
-### Common errors and fixes
+## Common errors and fixes
 
 | Error | What it means | Fix |
 |---|---|---|
 | `remote origin already exists` | Already linked to GitHub | Safe to ignore, keep going |
 | `src refspec main does not match any` | No commits yet | Run `git add .` then `git commit -m "..."` first |
 | Asked for password | GitHub no longer uses account passwords | Use a Personal Access Token instead |
-
----
-
-## Tips
-
-- Press **Up arrow** to repeat the last command
-- Press **Tab** to auto-complete folder/file names
-- Commands are case-sensitive (`ls` works, `LS` does not)
-- If a path has spaces, wrap it in quotes: `cd "my folder"`
